@@ -1,0 +1,11 @@
+import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib import style
+import math
+
+data = np.loadtxt("txtFiles/apulseNUM_vs_date_Ch0_batch.txt", unpack=True, delimiter=",")
+results = np.array(data)
+
+sorted_results = results[:, results[2, :].argsort()]
+
+print(sorted_results[2])
