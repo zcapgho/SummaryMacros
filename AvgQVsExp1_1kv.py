@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from matplotlib import style
 import math
 
-data = np.loadtxt("txtFiles/1400V/afterpulseQ_vs_date_Ch0.txt", unpack=True, delimiter=",")
+data = np.loadtxt("txtFiles/1000V/afterpulseQ_vs_date_Ch1_1kV.txt", unpack=True, delimiter=",")
 
 results = np.array(data)
 sorted_results = results[:, results[1, :].argsort()]
@@ -44,10 +44,10 @@ print(sorted_results[1])
 print(sorted_results[2])
 
 plt.errorbar(Exposure,avgq, yerr=err, marker='.',capsize=2, label="title", ls = 'none')
-plt.xlabel('Exposure / days since 02/11/19')
+plt.xlabel('Exposure / days since 08/10/19')
 plt.ylabel('Afterpulse Charge / pC')
-plt.ylim(9,11.1)
-plt.title('Average afterpulse charge vs Exposure PMT Ch0')
+plt.ylim(7,8)
+plt.title('Average afterpulse charge vs Exposure PMT Ch1 @ 1kV')
 
-plt.savefig('SummaryPlots/1400V/AvgQVsExp0.pdf')
+plt.savefig('SummaryPlots/1000V/AvgQVsExp1_1kV.pdf')
 plt.show()

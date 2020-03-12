@@ -164,9 +164,16 @@ plt.show()
 
 fig3, ax5 = plt.subplots()
 color = 'tab:blue'
-ax5.set_ylabel("Mu value / pC",color=color)
+ax5.set_ylabel("Mu value / pC")
 ax5.errorbar(Exposure,mu, yerr = mu_err,marker=".", color=color, capsize=2, label ='title', ls = 'none')
 plt.title('Mu vs Exposure PMT Ch0')
 plt.savefig('SummaryPlots/1400V/MuVsExp0.pdf')
 plt.show()
 
+fig4, ax6 = plt.subplots()
+color = 'tab:red'
+ax6.set_ylabel("Sigma value")
+ax6.errorbar(Exposure,sigma, yerr = sigma_err, marker=".",color=color, capsize=2, label = 'title',ls='none')
+plt.title('Sigma vs Exposure PMT Ch0')
+plt.savefig('SummaryPlots/1400V/SigmaVsExp0.pdf')
+plt.show()

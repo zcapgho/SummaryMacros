@@ -26,8 +26,11 @@ def date_converter(dateinput):
     elif (dateinput > 200100) and (dateinput < 200132):
         newdate = dateinput - 200030
     # February
-    elif (dateinput > 200200) and (dateinput < 200229):
+    elif (dateinput > 200200) and (dateinput < 200230):
         newdate = dateinput - 200099
+    # March
+    elif (dateinput > 200300) and (dateinput < 200331):
+        newdate = dateinput - 200170
     return newdate
 
 
@@ -38,11 +41,12 @@ for item in sorted_results[1]:
     Exposure = np.append(Exposure,ndates)
 
 print(sorted_results[1])
+print(sorted_results[2])
 
 plt.errorbar(Exposure,avgq, yerr=err, marker='.',capsize=2, label="title", ls = 'none')
 plt.xlabel('Exposure / days since 02/11/19')
 plt.ylabel('Afterpulse Charge / pC')
-plt.ylim(9,11.1)
+plt.ylim(9.5,13)
 plt.title('Average afterpulse charge vs Exposure PMT Ch1')
 
 plt.savefig('SummaryPlots/1400V/AvgQVsExp1.pdf')

@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from matplotlib import style
 import math
 
-data = np.loadtxt("txtFiles/apulseNUM_vs_date_Ch0_batch.txt", unpack=True, delimiter=",")
+data = np.loadtxt("txtFiles/1000V/apulseNUM_vs_date_Ch0_1kV.txt", unpack=True, delimiter=",")
 results = np.array(data)
 
 sorted_results = results[:, results[2, :].argsort()]
