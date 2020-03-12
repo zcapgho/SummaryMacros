@@ -1,10 +1,5 @@
 import numpy as np
-from matplotlib import pyplot as plt
 from sklearn.linear_model import LinearRegression
-import pandas as pd
-import statsmodels.api as sm
-import seaborn as sns
-from scipy.stats import chisquare
 import ResVsExp0
 
 x = ResVsExp0.Exposure_line
