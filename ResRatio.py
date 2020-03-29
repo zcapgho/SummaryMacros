@@ -7,8 +7,8 @@ import seaborn as sns
 from scipy.stats import chisquare
 from scipy.optimize import curve_fit
 
-data0 = np.loadtxt("txtFiles/1400V/resolution_vs_date_Ch0_Ratio.txt", unpack=True, delimiter=",")
-data1 = np.loadtxt("txtFiles/1400V/resolution_vs_date_Ch1_Ratio.txt", unpack=True, delimiter=",")
+data0 = np.loadtxt("txtFiles/1000V/resolution_vs_date_Ch0_Ratio.txt", unpack=True, delimiter=",")
+data1 = np.loadtxt("txtFiles/1000V/resolution_vs_date_Ch1_Ratio.txt", unpack=True, delimiter=",")
 
 results0 = np.array(data0)
 results1 = np.array(data1)
@@ -108,5 +108,5 @@ plt.xlabel('Exposure / days since 23/10/19')
 plt.ylabel('Resolution Ratio')
 ##plt.ylim(0.5,1.1)
 plt.title('Resolution Ratio of Channel 0 to Channel 1 vs Exposure')
-plt.savefig('SummaryPlots/1400V/ResVsRatio.pdf')
+plt.savefig('SummaryPlots/1000V/ResVsRatio.pdf')
 plt.show()

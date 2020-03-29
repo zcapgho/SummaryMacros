@@ -16,6 +16,7 @@ def linearfit(x,m,c):
         y.append(m*x[i] + c)
     return y
 
+
 def chi2(y_obs, y_err, y_exp, n_par):
     chi2 = 0
     ndof = len(y_obs) - n_par - 1
@@ -24,7 +25,15 @@ def chi2(y_obs, y_err, y_exp, n_par):
     chi2 = chi2/ndof
     return chi2
 
-data = np.loadtxt("txtFiles/1400V/resolution_vs_date_Ch1.txt", unpack=True, delimiter=",")
+def residuals(y_obs,y_err, y_exp, n_par):
+    residuals = ([])
+    ndof = len(y_obs) - n_par -1
+    for i in range(len(y_exp)):
+        resid = ((y_exp[i] - y_obs[i])/y_err[i])
+        residuals = np.append(residuals,resid)
+    return residuals
+
+data = np.loadtxt("txtFiles/1000V/new_resolution_vs_date_Ch1.txt", unpack=True, delimiter=",")
 
 results = np.array(data)
 sorted_results = results[:, results[1, :].argsort()]
@@ -64,9 +73,14 @@ def date_converter(dateinput):
     # January
     elif (dateinput > 200100) and (dateinput < 200132):
         newdate = dateinput - 200015
+
     # February
-    elif (dateinput > 200200) and (dateinput < 200229):
+    elif (dateinput > 200200) and (dateinput < 200230):
         newdate = dateinput - 200084
+
+    elif (dateinput > 200300) and (dateinput < 200331):
+        newdate = dateinput - 200156
+
     return newdate
 
 Exposure = np.array([])
@@ -100,8 +114,11 @@ for i in range(len(popt)):
     print("Error on parameter {}: {} is {}".format(i, popt[i], np.sqrt(pcov[i][i])))
 
 chi2 = chi2(resolution_line, res_err_line, linearfit(resolution_line, *popt), 2)
+residuals = residuals(resolution_line,res_err_line,linearfit(resolution_line,*popt),2)
 
 print("The reduced chi2 is: ", chi2)
+print("The residuals are: ", residuals)
+print("the dates are: ", Exposure_l)
 
 fig2, ax3 = plt.subplots()
 color = 'tab:red'
@@ -143,7 +160,7 @@ ax2.set_ylim(3,7)
 ax2.tick_params(axis='y',labelcolor=color)
 
 plt.title('Resolution vs Exposure PMT Ch1')
-plt.savefig('SummaryPlots/1400V/ResVsExp1.pdf')
+plt.savefig('SummaryPlots/1000V/ResVsExp1.pdf')
 plt.show()
 
 fig3, ax5 = plt.subplots()
@@ -151,7 +168,7 @@ color = 'tab:blue'
 ax5.set_ylabel("Mu value / pC")
 ax5.errorbar(Exposure,mu, yerr = mu_err,marker=".", color=color, capsize=2, label ='title', ls = 'none')
 plt.title('Mu vs Exposure PMT Ch1')
-plt.savefig('SummaryPlots/1400V/MuVsExp1.pdf')
+plt.savefig('SummaryPlots/1000V/MuVsExp1.pdf')
 plt.show()
 
 fig4, ax6 = plt.subplots()
@@ -159,5 +176,13 @@ color = 'tab:red'
 ax6.set_ylabel("Sigma value")
 ax6.errorbar(Exposure,sigma, yerr = sigma_err, marker=".",color=color, capsize=2, label = 'title',ls='none')
 plt.title('Sigma vs Exposure PMT Ch1')
-plt.savefig('SummaryPlots/1400V/SigmaVsExp1.pdf')
+plt.savefig('SummaryPlots/1000V/SigmaVsExp1.pdf')
+plt.show()
+
+fig5, ax7 = plt.subplots()
+color = 'tab:blue'
+ax7.set_ylabel("residuals")
+ax7.plot(Exposure_l, residuals,marker=".", color=color,label='title',ls = 'none')
+plt.title("residuals plot")
+plt.savefig("SummaryPlots/1000V/ResolutionResidualsCh1.pdf")
 plt.show()

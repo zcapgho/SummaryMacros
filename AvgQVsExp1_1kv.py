@@ -14,23 +14,23 @@ err = sorted_results[4]
 def date_converter(dateinput):
     # October
     if dateinput < 191100:
-        newdate = dateinput - 191022
+        newdate = dateinput - 191007
 
     # November
     elif 191100 < dateinput < 191131:
-        newdate = dateinput - 191091
+        newdate = dateinput - 191076
     # December
     elif (dateinput > 191200) and (dateinput < 191232):
-        newdate = dateinput - 191161
+        newdate = dateinput - 191146
     # January
     elif (dateinput > 200100) and (dateinput < 200132):
-        newdate = dateinput - 200030
+        newdate = dateinput - 200015
     # February
     elif (dateinput > 200200) and (dateinput < 200230):
-        newdate = dateinput - 200099
+        newdate = dateinput - 200086
     # March
     elif (dateinput > 200300) and (dateinput < 200331):
-        newdate = dateinput - 200170
+        newdate = dateinput - 200157
     return newdate
 
 

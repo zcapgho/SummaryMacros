@@ -7,6 +7,7 @@ data = np.loadtxt("txtFiles/1000V/apulseNUM_vs_date_Ch0_1kV.txt", unpack=True, d
 results = np.array(data)
 sorted_results = results[:, results[2, :].argsort()]
 apulse = sorted_results[4]
+print(sorted_results[2])
 
 def date_converter(dateinput):
     # October
@@ -41,11 +42,16 @@ for item in sorted_results[2]:
 print(Exposure)
 print(apulse)
 
+fig1, ax1 = plt.subplots()
 
-plt.errorbar(Exposure,apulse,marker='.',capsize=2, label="title", ls = 'none')
+ax1.errorbar(Exposure[:24],apulse[:24],marker='.',capsize=2, label="no helium", ls = 'none',color='tab:blue')
+ax1.errorbar(Exposure[24:117],apulse[24:117],marker='.',capsize=2,label="1% helium", ls='none',color='tab:orange')
+ax1.errorbar(Exposure[117:],apulse[117:],marker='.',capsize=2,label="1% helium", ls='none',color='red')
+
 plt.xlabel('Exposure / days since 08/10/19')
 plt.ylabel('Percentage of afterpulses')
 plt.ylim(0,1)
 plt.title('Percentage of afterpulses vs Exposure (PMT Ch0 @ 1kV)')
 plt.savefig('SummaryPlots/1000V/ApVsExp0_1000V.pdf')
+plt.grid()
 plt.show()
